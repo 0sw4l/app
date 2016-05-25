@@ -69,10 +69,10 @@ def tarea_detail(request, pk):
         return Response(status.HTTP_400_BAD_REQUEST)
 
     if request.method == 'GET':
-        serializer = CategoriaSerializer(tarea)
+        serializer = TareaSerializer(tarea)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        serializer = CategoriaSerializer(tarea, data=request.data)
+        serializer = TareaSerializer(tarea, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

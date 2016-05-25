@@ -9,7 +9,7 @@ class CategoriaSerializer(serializers.ModelSerializer):
 
 
 class TareaSerializer(serializers.ModelSerializer):
-    categoria = CategoriaSerializer(many=True, source='categoria')
+
     class Meta:
         model = Tarea
-        fields = ('id', 'titulo', 'categoria__nombre', 'descripcion')
+        fields = ('id', 'titulo', 'categoria', 'descripcion')
