@@ -1,6 +1,5 @@
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from serializers import TareaSerializer, CategoriaSerializer
 from Todo.models import Categoria, Tarea
@@ -51,7 +50,7 @@ def tarea_list(request):
     if request.method == 'GET':
         tareas = Tarea.objects.all()
         serializer = TareaSerializer(tareas, many=True)
-        return Response(serializer.data)
+        return Response({'items': serializer.data})
 
     elif request.method == 'POST':
         serializer = TareaSerializer(data=request.data)
@@ -63,6 +62,9 @@ def tarea_list(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def tarea_detail(request, pk):
+    """
+    item
+    """
     try:
         tarea = Tarea.objects.get(id=pk)
     except Tarea.DoesNotExist:
@@ -70,7 +72,7 @@ def tarea_detail(request, pk):
 
     if request.method == 'GET':
         serializer = TareaSerializer(tarea)
-        return Response(serializer.data)
+        return Response({'items': serializer.data})
     elif request.method == 'PUT':
         serializer = TareaSerializer(tarea, data=request.data)
         if serializer.is_valid():
