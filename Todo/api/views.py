@@ -48,7 +48,7 @@ def categoria_detail(request, pk):
 def tarea_list(request):
 
     if request.method == 'GET':
-        tareas = Tarea.objects.all()
+        tareas = Tarea.objects.all().order_by('-id')
         serializer = TareaSerializer(tareas, many=True)
         return Response({'items': serializer.data})
 
